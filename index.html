@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Avia Masters — Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="phone">
+    <!-- ЛОГО -->
+    <img src="assets/logo.png" alt="logo" class="logo" />
+
+    <!-- СЦЕНА -->
+    <img src="assets/carrier.png" alt="carrier" class="carrier" />
+    <img src="assets/plane.png"   alt="plane"   class="plane" />
+
+    <!-- ВЗРЫВ -->
+    <div class="explosion" aria-hidden="true"></div>
+
+    <!-- ХАКЕРСКАЯ ПАНЕЛЬ -->
+    <div class="hacker-overlay" aria-hidden="true">
+      <div class="hacker-panel">
+        <div class="panel-title">> SIGNAL CONSOLE — ANALYTICS</div>
+        <pre id="hackLog" class="hack-log"></pre>
+        <div class="cursor"></div>
+      </div>
+    </div>
+
+    <!-- КНОПКА СТАРТА -->
+    <button class="start-btn">GET START</button>
+
+    <!-- БЛОК РЕЗУЛЬТАТОВ (всегда виден, слева снизу) -->
+    <div class="results-box" aria-live="polite">
+      <div class="results-title">Results</div>
+      <div class="results-list"></div>
+    </div>
+
+    <!-- ШЕСТЕРЁНКА (справа снизу) -->
+    <button class="settings-btn" title="Languages" aria-haspopup="true" aria-expanded="false">⚙</button>
+
+    <!-- МИНИ-МЕНЮ ЯЗЫКОВ (показывается по клику на шестерёнку) -->
+    <div class="lang-menu" hidden>
+      <button data-lang="en">EN</button>
+      <button data-lang="ru">RU</button>
+      <button data-lang="es">ES</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

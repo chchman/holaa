@@ -1,0 +1,217 @@
+:root {
+  --bg: #050805;
+  --grid: #0b2f0b;
+
+  /* авианосец */
+  --carrier-w: 420px;
+  --carrier-left: 50%;
+  --carrier-top: 55%;
+
+  /* самолёт (СТАРТОВАЯ ТОЧКА — меняешь тут) */
+  --plane-w: 100px;
+  --plane-start-x: 260px; /* X центра внутри .phone (px) */
+  --plane-start-y: 600px; /* Y центра внутри .phone (px) */
+
+  /* логотип */
+  --logo-w: 250px;
+  --logo-top: -35px;
+
+  /* кнопка старт */
+  --btn-left: 50%;
+  --btn-top: 700px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier New", monospace;
+  color: #07ff6a;
+}
+
+.phone {
+  aspect-ratio: 9 / 16;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px) 0 0/26px 26px,
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px) 0 0/26px 26px,
+    var(--bg);
+}
+
+/* логотип */
+.logo {
+  position: absolute;
+  top: var(--logo-top);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--logo-w);
+  filter: drop-shadow(0 0 6px #06c251);
+  z-index: 40;
+}
+
+/* авианосец */
+.carrier {
+  position: absolute;
+  left: var(--carrier-left);
+  top: var(--carrier-top);
+  transform: translateX(-50%);
+  width: var(--carrier-w);
+  filter: drop-shadow(0 0 8px #078f3e);
+  z-index: 10;
+}
+
+/* самолёт */
+.plane {
+  position: absolute;
+  left: var(--plane-start-x);
+  top: var(--plane-start-y);
+  transform: translate(-50%, -50%);
+  width: var(--plane-w);
+  filter: drop-shadow(0 0 6px #07ff6a);
+  z-index: 20;
+}
+
+/* кнопка GET START */
+.start-btn {
+  position: absolute;
+  left: var(--btn-left);
+  top: var(--btn-top);
+  transform: translateX(-50%);
+  padding: 14px 30px;
+  border: 2px solid #07ff6a;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #07ff6a;
+  cursor: pointer;
+  text-shadow: 0 0 6px #11cf5d;
+  box-shadow: 0 0 12px rgba(7,255,106,0.08);
+  z-index: 50;
+}
+.start-btn:hover { transform: translateX(-50%) scale(1.03); }
+
+/* взрыв */
+.explosion {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  border: 2px solid #07ff6a;
+  box-shadow: 0 0 15px #07ff6a, inset 0 0 10px #07ff6a;
+  z-index: 35;
+}
+.explosion.active { animation: retroBoom 1s ease-out forwards; }
+@keyframes retroBoom {
+  0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
+  40%  { transform: translate(-50%, -50%) scale(1.2); opacity: 0.95; }
+  70%  { transform: translate(-50%, -50%) scale(1.6); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* хакерская панель (маленькое окно слева сверху) */
+.hacker-overlay {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: none;
+  z-index: 5;
+}
+.hacker-panel {
+  width: 260px;
+  max-height: 160px;
+  padding: 8px;
+  border: 1px solid rgba(7,255,106,0.28);
+  background: rgba(0,0,0,0.55);
+  color: #07ff6a;
+  font-size: 12px;
+  overflow: auto;
+}
+.panel-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #bdfdb7;
+}
+.hack-log {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.2;
+  font-size: 11px;
+}
+.cursor {
+  width: 6px;
+  height: 12px;
+  background: #07ff6a;
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* результаты (всегда видимы, слева снизу) */
+.results-box {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 200px;
+  max-height: 180px;         /* чтоб не залезало на кнопку */
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(7,255,106,0.3);
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 12px;
+  overflow-y: auto;          /* скроллим, если много строк */
+  z-index: 150;
+}
+.results-title {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #bdfdb7;
+}
+.results-list div { padding: 2px 0; }
+
+/* шестерёнка — без обводок, просто символ */
+.settings-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: transparent;
+  border: none;
+  color: #07ff6a;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 200;
+  border-radius: 50%;
+}
+
+/* мини-меню языков возле шестерёнки */
+.lang-menu {
+  position: absolute;
+  right: 12px;
+  bottom: 48px; /* над шестерёнкой */
+  display: flex;
+  gap: 6px;
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(7,255,106,0.2);
+  border-radius: 8px;
+  padding: 6px;
+  z-index: 210;
+}
+.lang-menu[hidden] { display: none; }
+.lang-menu button {
+  background: transparent;
+  color: #07ff6a;
+  border: 1px solid rgba(7,255,106,0.25);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: "Courier New", monospace;
+  cursor: pointer;
+}
+.lang-menu button:hover {
+  box-shadow: 0 0 8px rgba(7,255,106,0.25);
+}
